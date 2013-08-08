@@ -1,21 +1,30 @@
-function getSelectionHtml(e) {
-  console.log("STARTING NOW");
-  var html = "";
-  if (window.getSelection) {
-    var currSelection = window.getSelection();
-    if (currSelection.rangeCount) {
-      var container = document.createElement("div");
-      for (var i = 0; i < currSelection.rangeCount; i++) {
-        container.appendChild(currSelection.getRangeAt(i).cloneContents());
-      }
-      html = container.innerHTML;
-    }
-    console.log(html);
-    currSelection.removeAllRanges();
-  } else {
-    console.log("Your browser does not support!");
-  }
-  return html;
+
+function getSelectionHtml(string) {
+  business = autoExtractName();
+  console.log(business);
+  console.log(string);
 }
 
-document.addEventListener("mouseup", getSelectionHtml, false);
+function autoExtractName() {
+  title = document.title;
+  console.log(title);
+  var name = "";
+  var metas = document.getElementsByTagName("meta");
+  console.log(metas.length);
+  for (var i = 0; i < metas.length; i++) {
+    console.log(metas[i].property);
+    if (metas[i].property == "og:site_name") {
+      name = metas[i].content;
+    }
+  }
+  if (name == "") {
+    name = "NOT FOUND!";
+  }
+  return name;
+}
+
+chrome.contextMenus.create({
+  'title': 'Send to Factual',
+  'contexts': ['selection'],
+  'onclick': function(info, tab) { getSelectionHtml(info.selectionText); }
+});
