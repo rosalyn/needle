@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "Needle",
+  "description": "Sansa can keep her sewing needles, I've got a needle of my own",
+  "version": "1.0",
+  "permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file:///*/*"],
+      "js": ["needle.js"]
+    }
+  ]
+}
