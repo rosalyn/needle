@@ -1,8 +1,10 @@
 
 function getSelectionHtml(string) {
-  business = autoExtractName();
-  console.log(business);
-  console.log(string);
+  var extracted_business = autoExtractName();
+  var locality_pattern = /([^0-9,]+), [A-Z]{2} [0-9]{5}/i
+  var extracted_locality = locality_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
+  console.log(extracted_business);
+  console.log(extracted_locality);
 }
 
 function autoExtractName() {
