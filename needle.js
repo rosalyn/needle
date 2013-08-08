@@ -1,10 +1,15 @@
 
 function getSelectionHtml(string) {
   var extracted_business = autoExtractName();
-  var locality_pattern = /([^0-9,]+), [A-Z]{2} [0-9]{5}/i
-  var extracted_locality = locality_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
+  var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
+  var tel_pattern = /(\b[0-9]{3}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
+
+  var extracted_address = address_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
+  var extracted_tel = tel_pattern.exec(string)[1];
+  
   console.log(extracted_business);
-  console.log(extracted_locality);
+  console.log(extracted_address);
+  console.log(extracted_tel);
 }
 
 function autoExtractName() {
