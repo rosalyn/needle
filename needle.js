@@ -2,14 +2,26 @@ var extracted_address;
 var extracted_tel;
 
 function getSelectionHtml(string) {
+  console.log(string);
   var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
-  var tel_pattern = /(\b[0-9]{3}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
+  var tel_pattern = /([\(\)0-9]{3,5}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
 
-  extracted_address = address_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
-  extracted_tel = tel_pattern.exec(string)[1];
+  match_address = address_pattern.exec(string)
+  if (match_address) {
+    extracted_address = match_address[1].replace(/^\s+|\s+$/g, "");
+  }
+  else {
+    extracted_address = "";
+  }
   
-  console.log(extracted_address);
-  console.log(extracted_tel);
+  match_tel = tel_pattern.exec(string)
+  if (match_tel) {
+    extracted_tel = match_tel[1];
+  }
+  else {
+    extracted_tel = "";
+  }
+  
 }
 
 function autoExtractName() {
