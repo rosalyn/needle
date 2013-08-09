@@ -4,7 +4,7 @@ var src_url;
 
 function getSelectionHtml(string,url) {
   console.log(string);
-  var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
+  var address_pattern = /(\d+\s+[':.,\(\)\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
   var tel_pattern = /([\(\)0-9]{3,5}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
   src_url = url;
 
