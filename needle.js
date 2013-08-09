@@ -59,7 +59,20 @@ chrome.contextMenus.create({
   'onclick': function(info, tab) { 
     getSelectionHtml(info.selectionText,info.pageUrl); 
     chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}, function(tab) {
-      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('tel').setAttribute('name', 'tel'); document.getElementById('address').setAttribute('name', 'address'); document.getElementById('address').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('country').setAttribute('name', 'country'); document.getElementById('country').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('website').setAttribute('name', 'website'); document.getElementById('website').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'; document.getElementById('country').value = 'us'; document.getElementById('website').value = '"+extracted_website+"'; document.getElementById('submit_form_reference').value = '"+src_url+"'"});
+      chrome.tabs.executeScript(tab.id, {code: "\
+      document.getElementById('tel').setAttribute('class', 'check-dirty dirty-field');\
+      document.getElementById('tel').setAttribute('name', 'tel');\
+      document.getElementById('tel').value = '"+extracted_tel+"';\
+      document.getElementById('address').setAttribute('class', 'check-dirty dirty-field');\
+      document.getElementById('address').setAttribute('name', 'address');\
+      document.getElementById('address').value = '"+extracted_address+"';\
+      document.getElementById('country').setAttribute('class', 'check-dirty dirty-field');\
+      document.getElementById('country').setAttribute('name', 'country');\
+      document.getElementById('country').value = 'us';\
+      document.getElementById('website').setAttribute('class', 'check-dirty dirty-field');\
+      document.getElementById('website').setAttribute('name', 'website');\
+      document.getElementById('website').value = '"+extracted_website+"';\
+      document.getElementById('submit_form_reference').value = '"+src_url+"'"});
       });
   }
 });
