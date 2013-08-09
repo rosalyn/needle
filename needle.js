@@ -30,13 +30,9 @@ function autoExtractName() {
   return name;
 }
 
-chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'});
-  chrome.tabs.onCreated.addListener(function() {alert('hello new tab')});
-});
-
 chrome.contextMenus.create({
   'title': 'Send to Factual',
   'contexts': ['selection'],
-  'onclick': function(info, tab) { getSelectionHtml(info.selectionText); }
+  //'onclick': function(info, tab) { getSelectionHtml(info.selectionText); }
+  'onclick': function(info, tab) { chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}); getSelectionHtml(info.selectionText); }
 });
