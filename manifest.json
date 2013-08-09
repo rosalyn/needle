@@ -10,5 +10,11 @@
   "background": {
     "scripts": ["needle.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*", "file:///*/*"],
+      "js": ["thehound.js"]
+    }
+  ],
   "manifest_version": 2
 }
