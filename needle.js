@@ -1,10 +1,12 @@
 var extracted_address;
 var extracted_tel;
+var src_url;
 
-function getSelectionHtml(string) {
+function getSelectionHtml(string,url) {
   console.log(string);
   var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
   var tel_pattern = /([\(\)0-9]{3,5}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
+  src_url = url;
 
   match_address = address_pattern.exec(string)
   if (match_address) {
@@ -45,11 +47,10 @@ function autoExtractName() {
 chrome.contextMenus.create({
   'title': 'Send to Factual',
   'contexts': ['selection'],
-  //'onclick': function(info, tab) { getSelectionHtml(info.selectionText); }
   'onclick': function(info, tab) { 
-    getSelectionHtml(info.selectionText); 
+    getSelectionHtml(info.selectionText,info.pageUrl); 
     chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}, function(tab) {
-      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'"});
+      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'; document.getElementById('submit_form_reference').value = '"+src_url+"'; document.getElementById('country').value = 'us'"});
     });
   }
 });
