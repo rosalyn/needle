@@ -5,7 +5,7 @@ var src_url;
 var head_html;
 
 function extract_happens(string) {
-  var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
+  var address_pattern = /(\d+\s+[':.,\(\)\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
   var tel_pattern = /([\(\)0-9]{3,5}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
 
   match_address = address_pattern.exec(string)
@@ -54,7 +54,10 @@ function autoExtractAttributes(stuff) {
   htmlObject.innerHTML = stuff;
   var metas = htmlObject.getElementsByTagName('meta');
   for (var i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute('property') == "og:site_name") {
+    if (metas[i].getAttribute('property') == "og:title") {
+      extracted_name = metas[i].content;
+    }
+    if (extracted_name == null && metas[i].getAttribute('property') == "og:site_name") {
       extracted_name = metas[i].content;
     }
   }
