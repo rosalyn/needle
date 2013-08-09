@@ -34,5 +34,10 @@ chrome.contextMenus.create({
   'title': 'Send to Factual',
   'contexts': ['selection'],
   //'onclick': function(info, tab) { getSelectionHtml(info.selectionText); }
-  'onclick': function(info, tab) { chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}); getSelectionHtml(info.selectionText); }
+  'onclick': function(info, tab) { 
+    getSelectionHtml(info.selectionText); 
+    chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}, function(tab) {
+      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'"});
+    });
+  }
 });
