@@ -50,7 +50,7 @@ chrome.contextMenus.create({
   'onclick': function(info, tab) { 
     getSelectionHtml(info.selectionText,info.pageUrl); 
     chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'}, function(tab) {
-      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'; document.getElementById('submit_form_reference').value = '"+src_url+"'; document.getElementById('country').value = 'us'"});
+      chrome.tabs.executeScript(tab.id, {code: "document.getElementById('tel').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('address').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('country').setAttribute('class', 'check-dirty dirty-field'); document.getElementById('tel').value = '"+extracted_tel+"'; document.getElementById('address').value = '"+extracted_address+"'; document.getElementById('submit_form_reference').value = '"+src_url+"'; document.getElementById('country').value = 'us'"});
     });
   }
 });
