@@ -46,12 +46,13 @@ function populate_form() {
     document.getElementById('address').setAttribute('class', 'check-dirty dirty-field');\
     document.getElementById('address').setAttribute('name', 'address');\
     document.getElementById('address').value = '"+extracted_address+"';\
-	document.getElementById('country').setAttribute('class', 'check-dirty dirty-field');\
+    document.getElementById('country').setAttribute('class', 'check-dirty dirty-field');\
     document.getElementById('country').setAttribute('name', 'country');\
     document.getElementById('country').value = 'us';\
     document.getElementById('website').setAttribute('class', 'check-dirty dirty-field');\
     document.getElementById('website').setAttribute('name', 'website');\
     document.getElementById('website').value = '"+extracted_website+"';\
+    document.getElementsByClassName('submit-button btn btn-primary')[0].removeAttribute('disabled');\
     document.getElementById('submit_form_reference').value = '"+src_url+"'"});
   });
 }
