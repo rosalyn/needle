@@ -2,9 +2,12 @@
   "name": "Needle",
   "description": "Sansa can keep her sewing needles, I've got a needle of my own",
   "version": "0.6",
-  "permissions": ["contextMenus"],
+  "permissions": ["contextMenus", "tabs", "http://www.factual.com/*"],
   "background": {
     "scripts": ["needle.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
   },
   "manifest_version": 2
 }

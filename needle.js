@@ -1,13 +1,13 @@
+var extracted_address;
+var extracted_tel;
 
 function getSelectionHtml(string) {
-  var extracted_business = autoExtractName();
   var address_pattern = /(\d+\s+[':.,\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
   var tel_pattern = /(\b[0-9]{3}[\. -]*[0-9]{3}[\. -]*[0-9]{4}\b)/i;
 
-  var extracted_address = address_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
-  var extracted_tel = tel_pattern.exec(string)[1];
+  extracted_address = address_pattern.exec(string)[1].replace(/^\s+|\s+$/g, "");
+  extracted_tel = tel_pattern.exec(string)[1];
   
-  console.log(extracted_business);
   console.log(extracted_address);
   console.log(extracted_tel);
 }
@@ -29,6 +29,11 @@ function autoExtractName() {
   }
   return name;
 }
+
+chrome.browserAction.onClicked.addListener(function(tab) {
+  chrome.tabs.create({url: 'http://www.factual.com/submit-form/t/places/new'});
+  chrome.tabs.onCreated.addListener(function() {alert('hello new tab')});
+});
 
 chrome.contextMenus.create({
   'title': 'Send to Factual',
