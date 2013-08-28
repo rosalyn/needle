@@ -6,7 +6,7 @@ var src_url;
 var head_html;
 
 function extract_happens(string) {
-  var address_pattern = /(\d+\s+[':.,\(\)\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
+  var address_pattern = /(\d+\s+[':.,&\(\)\s\w]*,\s*[A-Za-z]+\s*\d{5}(-\d{4})?)/i;
   var tel_pattern = /([\(\)0-9]{3,5}[\. \-\/]*[0-9]{3}[\. \-\/]*[0-9]{4})/i;
   var website_pattern = /((?:https?:\/\/)?(?:[a-z]+\.)?[a-z0-9\-]+\.(?:com|org|net))/i;
   src_url = url;
